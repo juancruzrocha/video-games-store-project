@@ -7,10 +7,9 @@ import { RootState } from "../../redux/store";
 import styles from "./WishList.module.scss";
 import WishCard from "../../components/WhishCard/WishCard";
 import NavbarPhone from "../../phone/navBarPhone/navBarPhone";
-import { WishProductObj } from "./interfaces/wishProduct";
 
 const WishList = () => {
-  const wishListStore: WishProductObj[] = useAppSelector(
+  const wishListStore = useAppSelector(
     (state: RootState) => state.wishReducer.wishList
   );
   const { user } = useAuth0();
