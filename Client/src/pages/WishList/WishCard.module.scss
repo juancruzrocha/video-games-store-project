@@ -1,0 +1,83 @@
+@media (min-width:320px) and (max-width:960px) {
+.conatiner{
+    align-self: center;
+    padding: 5%;
+    background-color: black;
+    border-radius: 0.5rem;
+    margin-bottom: 5%;
+}
+
+.conatiner img{
+  width: 90%;
+    border-radius: 0.5rem;
+    align-self: center;
+}
+.iconCross{
+    display: none;
+}
+.iconCrossPhone{
+    margin-top: 10%;
+    width: 90%;
+    background-color: whitesmoke;
+}
+.iconCrossPhone img{
+    
+    width: 10%;
+}
+
+
+}
+
+
+@media (min-width:961px){
+    .iconCrossPhone{
+        display: none;
+    }
+.conatiner{
+    width: 100%;
+    display: flex;
+    border-radius: 1rem;
+    margin-bottom: 20px;
+    justify-content: center;
+    gap: 10%;
+    cursor: pointer;
+    background-image: linear-gradient(to bottom right, black, rgb(4, 4, 134));
+    padding: 5%;
+}
+.conatiner img{
+    width: 100px;
+    height: 70px;
+    border-radius: 0.5rem;
+    align-self: center;
+}
+.data{
+    display: grid;
+    grid-template-columns:  100px 80px 120px;
+    justify-content: center;
+    align-items: center;
+    column-gap: 100px;
+    border-radius: 1rem;
+}
+.Links{
+    color: white;
+}
+.name{
+    grid-column: 1/2;
+}
+.price{
+    grid-column: 2/3;
+}
+.released{
+    grid-column: 3/4;
+}
+.iconCross{
+    grid-column: 4/5;
+    filter: invert(1);
+    cursor: pointer;
+    transition: 1s;
+}
+.iconCross:hover{
+    transition: 1s;
+    filter: invert(16%) sepia(91%) saturate(3003%) hue-rotate(279deg) brightness(90%) contrast(98%);
+}
+}

@@ -1,0 +1,48 @@
+@media (min-width:320px) and (max-width:960px) {
+    .container{
+        margin-top: 20%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tittles{
+        display: none;
+    }
+    .top{
+        font-size: xx-large;
+    }
+}
+
+@media (min-width:961px){
+.container{
+    margin-top: 11%;
+    border-radius: 1rem;
+    padding: 10%;
+    padding-top: 3%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    width: 120%;
+    background-image: linear-gradient(to bottom right, rgb(107, 0, 137), rgb(4, 4, 17));
+}
+.top{
+    grid-column:1/4 ;
+    font-size: xx-large;
+    margin-bottom: 5%;
+}
+.tittle{
+    width: 300px;
+    padding: 1%;
+}
+.tittles{
+    grid-column:1/4 ;
+    display: flex;
+}
+.containerCardsList{
+    padding: 5%;
+    grid-column:1/4 ;
+    margin: 3%;
+    border-radius: 1rem;
+    
+}
+}

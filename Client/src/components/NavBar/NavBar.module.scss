@@ -1,0 +1,101 @@
+@import '../../styles/global-vars.scss';
+
+@media (min-width:320px) and (max-width:960px){
+    .mainContainer {
+        display: flex;
+        width: 100%;
+    }
+    .listContainer {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .home{
+        
+    }
+    .home img {
+        width: 120px;
+    }
+    .loginButton {
+        // background-color: #018dff;
+        cursor: pointer;
+        border-radius: 20px;
+        border-color: white;
+        margin-right: 5px;
+    }
+    
+    .loginButton:hover {
+        background-color: #004074;
+        transition: 1s;
+        color: #018dff;
+    }
+    .containerSearch img {
+        display: none;
+    }
+}
+
+
+@media (min-width:961px){
+    .mainContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        z-index: 200;
+        justify-content: center;
+    }
+    .home{
+        
+    }
+    .home img {
+        width: 120px;
+    }
+
+    .listContainer {
+        list-style: none;
+        background-color: black;
+        box-shadow: 5px 5px 15px 0 $shadow-purple-color-dark;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+        margin: 0px;
+        margin-bottom: 0px;
+        font-family: 'Orbitron', sans-serif;
+    }
+    .containerSearch{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .containerSearch img {
+        filter: invert(1);
+        width: 25px;
+        margin-right: 1%;
+        cursor: pointer;
+        transition: 1s;
+    }
+    .loginButton {
+        border: none;
+        background-color: rgba($color: #000000, $alpha: 0);
+        cursor: pointer;
+        margin-right: 5px;
+    }
+    .containerSearch img:hover {
+        transition: 1s;
+        filter: invert(16%) sepia(91%) saturate(3003%) hue-rotate(279deg) brightness(90%) contrast(98%);
+    }
+    .loginButton:hover {
+        border: none;
+        background-color: rgba($color: #000000, $alpha: 0);
+        color: #891ca7;
+        transition: 1s;
+    }
+}

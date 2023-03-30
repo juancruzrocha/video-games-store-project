@@ -1,0 +1,77 @@
+@import '../../styles/global-vars.scss';
+    
+@media (min-width:320px) and (max-width:960px){
+    .containerSearch{
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-self: center;        
+    }
+    .textSearch{
+        display: none;
+    }
+    .But {
+        cursor: pointer;
+        border-radius: 20px;
+        background-color: rgba($color: #000000, $alpha: 1.0);
+        margin-left: 10px;
+    }
+
+    .iconSearch{
+        width: 25px;
+        filter: invert(1);
+    }
+    .Input{
+        width: 100%;
+        border-radius: 10rem;
+        background-color: #000000;
+        text-align: center;
+    }
+    .Input::placeholder{
+        text-align: center;
+    }
+}
+
+@media (min-width:961px){
+    .iconSearch{
+        filter: invert(1);
+        width: 25px;
+        height: 25px;
+    }
+
+    .containerSearch{
+        display: flex;
+        flex-direction: row;
+        width: 40%;
+    }
+    .Input {
+        font-family: 'Orbitron', sans-serif;
+        border-radius: 20px;
+        width: 150%;
+        background-color: rgba($color: black, $alpha: 0.5);
+        text-align: center;
+    }
+    .Input:hover{
+        background-image: linear-gradient(to bottom right, black, rgb(15, 15, 86));
+    }
+    .Input::placeholder{
+        text-align: center;
+        width: 100%;
+        
+    }
+
+    .But {
+        background-color: rgba($color: #000000, $alpha: 0);
+        cursor: pointer;
+        justify-content: center;
+        border: 0px;
+    }
+    .But:hover{
+        border: 0px;
+    }
+    .textSearch{
+        color: white;
+        display: none;
+    }
+}
