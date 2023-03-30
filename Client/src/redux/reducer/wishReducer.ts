@@ -1,9 +1,9 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
-import { wishReducerState } from "../interfaces/wishInterFace";
+import { WishReducerState } from "../interfaces/wishInterFace";
 
-const initialState: wishReducerState = {
+const initialState: WishReducerState = {
     wishList: [],
 };
 

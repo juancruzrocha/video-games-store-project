@@ -1,9 +1,48 @@
+
+export interface ShoppinCartConexion {
+    ProductId:number
+    UserEmail:string
+  }
+interface ProductyGenresTypes {
+    GenreId:number
+    ProductId:number
+}
+interface GenresTypes {
+    ProductsGenres:ProductyGenresTypes
+    created:boolean
+    id:number
+    name:string
+    state:boolean
+}
+export interface ShoppingCartType {
+    Genres:GenresTypes
+    ShoppingCart:ShoppinCartConexion
+    background_image:string
+    created:boolean
+    description:string
+    id:number
+    name:string
+    playtime:number
+    price:string
+    rating:string
+    released:string
+    state:boolean
+}
+
+export interface gameParamType {
+    background_image:string
+    genres:string[]
+    id:number
+    name:string
+    price:string
+}
+
 export interface shoppingCartReducerState{
-    listProductsShoppingCartUser: Array<object>,
+    listProductsShoppingCartUser: ShoppingCartType[],
     totalAmount: number, 
     successMsg: string,
     errorMsg: string,
-    listProductsShoppingCartGuest: Array<object>,
+    listProductsShoppingCartGuest: ShoppingCartType[],
     emptyUserDBShoppingCart: boolean,
     finalPriceForCheckout: number,
 }

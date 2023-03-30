@@ -5,19 +5,20 @@ import { getProductsOfLibraryById } from "../../Controller/LibraryController";
 import NavbarPhone from "../../phone/navBarPhone/navBarPhone";
 import styles from "./Library.module.scss";
 import CardLibrary from "../../components/LibraryCard/LibraryCard";
-import { ProductsType } from "./LibraryInterfaces";
+import { ProductsType } from "../../types";
 
 const Library = () => {
   const { user } = useAuth0();
   const [products, setProducts] = useState<ProductsType[]>([]);
-  console.log(products, "a ver como soy porodutcs");
+
   useEffect(() => {
     if (user?.email) {
-      getProductsOfLibraryById(String(user.email)).then(
-        (products: ProductsType[]) => setProducts(products)
+      getProductsOfLibraryById(String(user.email)).then((products) =>
+        setProducts(products)
       );
     }
   }, []);
+
   return (
     <div className={styles.fullContainer}>
       {window.innerWidth > 959 ? <NavBar /> : <NavbarPhone />}

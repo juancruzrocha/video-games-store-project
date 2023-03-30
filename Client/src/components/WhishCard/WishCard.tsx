@@ -4,10 +4,7 @@ import { setwishList } from "../../redux/reducer/wishReducer";
 import { useAppDispatch } from "../../redux/hooks/hooks";
 import { removeProductToWishList } from "../../Controller/wishCard.";
 import { Link } from "react-router-dom";
-import {
-  wishCard,
-  WishProductObj,
-} from "../../pages/WishList/interfaces/wishProduct";
+import { WishCardType } from "../../redux/interfaces/wishInterFace";
 
 const WishCard = ({
   id,
@@ -16,14 +13,11 @@ const WishCard = ({
   background_image,
   price,
   released,
-}: wishCard) => {
+}: WishCardType): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const deleteProductOfWishList = async () => {
-    const newWishList: WishProductObj[] = await removeProductToWishList(
-      email,
-      id
-    );
+    const newWishList = await removeProductToWishList(email, id);
     dispatch(setwishList(newWishList));
   };
 
