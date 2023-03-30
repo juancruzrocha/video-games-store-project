@@ -4,15 +4,14 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import iconArrow from "./images/hamburger-menu-icon.png";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import icon from "./images/icon.png";
 import axios from "axios";
 import SubNavbar from "../SubNavbar/SubNavbar";
-import { ShowDailyDiscount } from './../ShowDailyDiscount/ShowDailyDiscount';
-
+import { ShowDailyDiscount } from "./../ShowDailyDiscount/ShowDailyDiscount";
 
 export const NavBar = () => {
-  const [showSubNavBar,setShowSubNavBar] = useState(false);
+  const [showSubNavBar, setShowSubNavBar] = useState(false);
   const {
     loginWithRedirect,
     user,
@@ -26,25 +25,29 @@ export const NavBar = () => {
   };
 
   return (
-    <nav className={style.mainContainer} >
-      <div className={style.listContainer} >
+    <nav className={style.mainContainer}>
+      <div className={style.listContainer}>
         <Link to="/" className={style.home}>
           <img src={icon} alt="joystick_icon" />
         </Link>
-        <ShowDailyDiscount/>
+        <ShowDailyDiscount />
         <div className={style.containerSearch}>
-          <img src={iconArrow} alt="arrowIcon" onClick={()=>setShowSubNavBar(!showSubNavBar)}/>
+          <img
+            src={iconArrow}
+            alt="arrowIcon"
+            onClick={() => setShowSubNavBar(!showSubNavBar)}
+          />
           <SearchBar />
         </div>
         {isAuthenticated ? (
-            <button
-              className={style.loginButton}
-              onClick={() =>
-                logout({ logoutParams: { returnTo: window.location.origin } })
-              }
-            >
-              LOG OUT
-            </button>
+          <button
+            className={style.loginButton}
+            onClick={() =>
+              logout({ logoutParams: { returnTo: window.location.origin } })
+            }
+          >
+            LOG OUT
+          </button>
         ) : (
           <button
             className={style.loginButton}
@@ -58,9 +61,7 @@ export const NavBar = () => {
           </button>
         )}
       </div>
-      <SubNavbar
-        show = {showSubNavBar}
-      />
+      <SubNavbar show={showSubNavBar} />
     </nav>
   );
 };

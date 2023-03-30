@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useAppDispatch } from "../../redux/hooks/hooks";
 import { selectedFilterPriceRange } from "../../redux/reducer/productReducer";
 
-
 export const PriceSlider = () => {
   const [priceRange, setPriceRange] = useState([0, 100]);
   const [lowLimit, setLowLimit] = useState();
@@ -19,8 +18,8 @@ export const PriceSlider = () => {
   };
 
   useEffect(() => {
-    dispatch(selectedFilterPriceRange(priceRange))
-  }, [priceRange])
+    dispatch(selectedFilterPriceRange(priceRange));
+  }, [priceRange]);
 
   return (
     <div>
@@ -46,7 +45,7 @@ export const PriceSlider = () => {
       </div>
       <div className={styles.PriceRange}>
         <span>{`Lowest: $ ${priceRange[0]}`}</span>
-        <br/>
+        <br />
         <span>{`Highest: $ ${priceRange[1]}`} </span>
       </div>
     </div>

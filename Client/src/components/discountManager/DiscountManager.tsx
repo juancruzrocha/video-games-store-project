@@ -19,8 +19,9 @@ export const DiscountManager = () => {
   const [selectedGenre, setSelectedGenre] = useState("");
   const [activeAdmin, setActiveAdmin] = useState(false);
   // @ts-ignore
-  const [showActiveDiscount, setShowActiveDiscount] = useState<DiscountState>({});
-
+  const [showActiveDiscount, setShowActiveDiscount] = useState<DiscountState>(
+    {}
+  );
 
   //let allDaysArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   let defaultDiscounts = [
@@ -46,12 +47,12 @@ export const DiscountManager = () => {
     (state) => state.productReducer.todaysDiscount
   );
 
-  const selectDisc = (e:any) => {
+  const selectDisc = (e: any) => {
     let disc = parseFloat(e.target.value);
     setSelectedDiscount((prev) => (prev = disc));
   };
 
-  const selectGenre = (e:any) => {
+  const selectGenre = (e: any) => {
     let genre = e.target.value;
     setSelectedGenre(genre);
   };
@@ -140,9 +141,14 @@ export const DiscountManager = () => {
       <h2>Genres</h2>
       <div className={style["genres-list"]}>
         {allGenres.length > 0 &&
-          allGenres.map(({name}:any, index) => {
+          allGenres.map(({ name }: any, index) => {
             return (
-              <button value={name} onClick={selectGenre} key={index} className={style['genres-button']}>
+              <button
+                value={name}
+                onClick={selectGenre}
+                key={index}
+                className={style["genres-button"]}
+              >
                 {name}
               </button>
             );
