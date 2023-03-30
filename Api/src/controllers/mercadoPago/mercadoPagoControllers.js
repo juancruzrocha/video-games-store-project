@@ -9,11 +9,9 @@ const fs = require('fs');
 
 const createPaymentMercadoPago = async (items, client, discount) => {
     //console.log(htmlmail, typeof htmlmail)
-    let clientName; 
-    let clientSurname;
     let clientFullName = selectNameSurname(client);
-    clientName = clientFullName.clientName;
-    clientSurname = clientFullName.clientSurname;
+    let clientName = clientFullName.clientName;
+    let clientSurname = clientFullName.clientSurname;
     if(discount.genre !== 'No_Discount'){
         items = applyDiscount(items, discount)
     }

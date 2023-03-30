@@ -81,13 +81,13 @@ export const DashboardUser = () => {
               setSearchUser(event.target.value)
             }
           />
-          <div className={styles['button-search']}>
-          <button onClick={() => handlerSearch()}>
-            <img src={iconSearch} />
-          </button>
-          <button onClick={handleClear}>
-            <img src={trashIcon} />
-          </button>
+          <div className={styles["button-search"]}>
+            <button onClick={() => handlerSearch()}>
+              <img src={iconSearch} />
+            </button>
+            <button onClick={handleClear}>
+              <img src={trashIcon} />
+            </button>
           </div>
         </div>
         <div className={styles["user-info"]}>
