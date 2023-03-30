@@ -17,31 +17,38 @@ export const Home = () => {
 
   const toTheSearchList = (e: any) => {
     dispatch(
-      getProductsByFilters({
-        name: "",
-        filters: {
-          genres: [],
-          platform: [],
-          priceRange: [0, 100],
+      getProductsByFilters(
+        {
+          name: "",
+          filters: {
+            genres: [],
+            platform: [],
+            priceRange: [0, 100],
+          },
+          order: {
+            alphabetic: "",
+            price: "",
+          },
         },
-        order: {
-          alphabetic: "",
-          price: "",
-        },
-      },
-      1
+        1
       )
     );
   };
 
   return (
     <div className={styles.container}>
-      {window.innerWidth > 959 ?<NavBar /> : <NavbarPhone/>}
-        <Carousel />
+      {window.innerWidth > 959 ? <NavBar /> : <NavbarPhone />}
+      <Carousel />
       <h2 className={styles.title}>TOP GAMES</h2>
       <Product />
-      <Link to={'/products'}>
-        <button className={styles['More-products-btn']} value='0' onClick={toTheSearchList}>All Games...</button>
+      <Link to={"/products"}>
+        <button
+          className={styles["More-products-btn"]}
+          value="0"
+          onClick={toTheSearchList}
+        >
+          All Games...
+        </button>
       </Link>
       <Footer />
     </div>

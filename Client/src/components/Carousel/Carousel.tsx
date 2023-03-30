@@ -21,7 +21,7 @@ export const Carousel = () => {
               <div className={styles["img-carousel"]}>
                 {currentImage === index ? (
                   <Link to={`/${item.id}`}>
-                   <img src={item.background_image} alt={item.name} />
+                    <img src={item.background_image} alt={item.name} />
                   </Link>
                 ) : null}
               </div>
@@ -47,5 +47,3 @@ export const Carousel = () => {
     </>
   );
 };
-
-

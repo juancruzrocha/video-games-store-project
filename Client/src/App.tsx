@@ -33,7 +33,7 @@ import NavbarPhone from "./phone/navBarPhone/navBarPhone";
 
 function App() {
   const dispatch = useAppDispatch();
-  const { user }:any = useAuth0();
+  const { user }: any = useAuth0();
   const userEmail = user?.email;
 
   const listUsersData = useAppSelector(
@@ -47,7 +47,7 @@ function App() {
   );
 
   const admin = listUsersData.find((item) => item.email === userEmail);
-  
+
   useEffect(() => {
     dispatch(getTopRatedProducts());
 
@@ -64,14 +64,12 @@ function App() {
       dispatch(setGlobalDiscount());
       dispatch(setAutoGlobalDiscount(true));
     }
-
   }, [discountGloballyApplied]);
 
   useEffect(() => {
     if (user !== undefined) {
       dispatch(saveNewUser(user.email, user.name, user.picture));
     }
-
   }, [user]);
 
   return (
@@ -92,7 +90,7 @@ function App() {
             <>
               <Route path="/users" element={<DashboardUser />} />
               <Route path="/productsList" element={<DashboardProducts />} />
-              <Route path="/sales" element={<DashboardSales/>}/>
+              <Route path="/sales" element={<DashboardSales />} />
               <Route path="/discMan" element={<DiscountManager />} />
             </>
           )}

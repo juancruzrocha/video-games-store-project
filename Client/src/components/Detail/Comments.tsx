@@ -29,10 +29,12 @@ const Comments = () => {
 
   const sendCommentHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    postComment(game, userComment, user, stars).then((newCommentObject: any) => {
-      setAllComments(newCommentObject);
-      setComment("");
-    });
+    postComment(game, userComment, user, stars).then(
+      (newCommentObject: any) => {
+        setAllComments(newCommentObject);
+        setComment("");
+      }
+    );
   };
 
   useEffect(() => {
@@ -84,14 +86,17 @@ const Comments = () => {
               <div>
                 <div>{commentObject.userId}</div>
                 <div>{commentObject.date}</div>
-            <Rating value={commentObject.stars || 3} readOnly cancel={false} />
+                <Rating
+                  value={commentObject.stars || 3}
+                  readOnly
+                  cancel={false}
+                />
               </div>
             </div>
             <div className={styles["comment-info"]}>
               <img src={commentIcon} alt="" />
               <p>{commentObject.comment}</p>
             </div>
-
           </div>
         ))}
     </>
