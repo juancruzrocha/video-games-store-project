@@ -1,4 +1,3 @@
-import { CardProps } from "../../types";
 import carIcon from "../../assets/shopping-cart-add-button_icon-icons.com_56132.svg";
 import styles from "./Card.module.scss";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
@@ -10,13 +9,17 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ADDED_TO_CART, ALREADY_IN_THE_CART } from "../../utils/constants";
 import { useAuth0 } from "@auth0/auth0-react";
-
-import { style } from "@mui/system";
 import {
   addProductToWishList,
   checkIfProductWasPurchased,
 } from "../../Controller/cardController";
 import { setwishList } from "../../redux/reducer/wishReducer";
+import {
+  CardProps,
+  gameInAddShoppingCart,
+  todayDiscountType,
+} from "./interfaces/interfaces";
+import { RootState } from "../../redux/store";
 
 export const Card = ({
   id,
@@ -25,27 +28,29 @@ export const Card = ({
   price,
   genres,
   state,
-}: any) => {
+}: CardProps) => {
+  const dispatch = useAppDispatch();
   const { user, isAuthenticated }: any = useAuth0();
+  const [successMsg, setSuccessMsg] = useState<string>("");
+  const [control, setControl] = useState<number>(-1);
+  const [discountPrice, setDiscountPrice] = useState<number>(0);
+  const [discountApplied, setDiscountApplied] = useState<boolean>(false);
+  const [saveInLocalStorage, setSaveInLocalStorage] = useState<boolean>(false);
   const [changeClass, setChangeClass] = useState({
     classButton: styles.buttonAdd,
     classCard: styles.cardContainer,
   });
-  const [successMsg, setSuccessMsg] = useState("");
-  const [control, setControl] = useState(-1);
-  const [discountPrice, setDiscountPrice] = useState(0);
-  const [discountApplied, setDiscountApplied] = useState(false);
-  const dispatch = useAppDispatch();
-  let totalPrice = useAppSelector(
-    (state) => state.shoppingCartReducer.totalAmount
+  let totalPrice: number = useAppSelector(
+    (state: RootState) => state.shoppingCartReducer.totalAmount
   );
-  const [saveInLocalStorage, setSaveInLocalStorage] = useState(false);
-  var todaysDiscount = useAppSelector(
-    (state) => state.productReducer.todaysDiscount
+
+  // solo funciona el tipado si lo pongo como posible undefined
+  let todaysDiscount: todayDiscountType = useAppSelector(
+    (state: RootState) => state.productReducer.todaysDiscount
   );
-  console.log("discountPrice", discountPrice);
+
   useEffect(() => {
-    if (saveInLocalStorage === true) {
+    if (saveInLocalStorage) {
       dispatch(
         saveShoppingCartInLocalStorage(listProductsShoppingCart, discountPrice)
       );
@@ -55,7 +60,7 @@ export const Card = ({
 
   useEffect(() => {
     if (user) {
-      checkIfProductWasPurchased(user.email, id).then((check) =>
+      checkIfProductWasPurchased(user.email, id).then((check: boolean) =>
         check
           ? setChangeClass({
               classButton: styles.buttonHide,
@@ -70,12 +75,11 @@ export const Card = ({
   }, []);
 
   useEffect(() => {
-    // @ts-ignore
     if (
-      parseFloat(price) !== 0 &&
-      todaysDiscount.discount !== "No_Discount" &&
-      genres.includes(todaysDiscount.genre) &&
-      parseFloat(price) !== discountPrice &&
+      Number(price) &&
+      todaysDiscount?.discount !== "No_Discount" && //esta comparacion esta mal,  todaysDiscount?.discount es de tipo number y aqui la compara con una string
+      genres.includes(String(todaysDiscount?.genre)) &&
+      Number(price) !== discountPrice &&
       !discountApplied
     ) {
       // @ts-ignore
@@ -100,33 +104,24 @@ export const Card = ({
     var totalAmount: number = totalPrice;
   }
 
-  const addingToShoppingCart = (e: any) => {
-    const game: object = {
+  const addingToShoppingCart = () => {
+    const game: gameInAddShoppingCart = {
       id,
       name,
       background_image,
       price,
       genres,
     };
-    const item = listProductsShoppingCart.find(
-      (item: any) => item.id == parseInt(id)
-    );
-
-    if (!item) {
-      //Si no esta el Producto en el carrito y
-      if (user) {
-        //si existe un usuario lo agrega al Carrito del USUARIO
-        dispatch(addNewProductInShoppingCart(id, user.email));
-        dispatch(addAmountForShoppingCartUser(price));
-      } else {
-        dispatch(addShoppingCart(game));
-        setControl(listProductsShoppingCart.length);
-        setSaveInLocalStorage(true);
-      }
-
+    //Si no esta el Producto en el carrito y
+    if (user) {
+      //si existe un usuario lo agrega al Carrito del USUARIO
+      dispatch(addNewProductInShoppingCart(id, user.email));
+      dispatch(addAmountForShoppingCartUser(price));
       setSuccessMsg(ADDED_TO_CART);
     } else {
-      setSuccessMsg(ALREADY_IN_THE_CART);
+      dispatch(addShoppingCart(game));
+      setControl(listProductsShoppingCart.length);
+      setSaveInLocalStorage(true);
     }
   };
 
