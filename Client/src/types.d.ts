@@ -13,6 +13,15 @@ export interface Game {
   state: boolean
   stores: string[];
 }
+export interface CardPropsType {
+  background_image:string
+  genres:string[]
+  id:number
+  name:string
+  price:string
+  state:boolean
+}
+
 
 export interface CardProps {
   id: string | number;

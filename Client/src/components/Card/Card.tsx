@@ -1,4 +1,3 @@
-import carIcon from "../../assets/shopping-cart-add-button_icon-icons.com_56132.svg";
 import styles from "./Card.module.scss";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { addShoppingCart } from "../../redux/actions/shoppingCartAction";
@@ -14,8 +13,8 @@ import {
   checkIfProductWasPurchased,
 } from "../../Controller/cardController";
 import { setwishList } from "../../redux/reducer/wishReducer";
-import { CardProps } from "./interfaces/interfaces";
 import { RootState } from "../../redux/store";
+import { CardPropsType } from "../../types";
 
 export const Card = ({
   id,
@@ -24,7 +23,7 @@ export const Card = ({
   price,
   genres,
   state,
-}: CardProps) => {
+}: CardPropsType) => {
   const dispatch = useAppDispatch();
   const { user, isAuthenticated }: any = useAuth0();
   const [successMsg, setSuccessMsg] = useState<string>("");
