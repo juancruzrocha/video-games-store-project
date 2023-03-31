@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { mercadoLibreReducerstate } from "../interfaces/mercadoLibreInterface";
 
 const initialState: mercadoLibreReducerstate = {
+    //Aramis:Que es este redirect]Link ?? veo que tiene uso pero no logre ver que tiene dentro para tiparlo
     redirectLink: {},
     response: false
 }
