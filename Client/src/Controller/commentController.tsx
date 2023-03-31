@@ -30,7 +30,7 @@ export const postComment = async (
 
   await axios({
     method: "post",
-    url: "https://games-store-v.netlify.app/user/newComment",
+    url: "http://localhost:3001/user/newComment",
     data,
   });
   const newCommentObject = await getAllProductComments(game);

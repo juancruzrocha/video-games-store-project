@@ -1,4 +1,3 @@
-import carIcon from "../../assets/shopping-cart-add-button_icon-icons.com_56132.svg";
 import styles from "./Card.module.scss";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { addShoppingCart } from "../../redux/actions/shoppingCartAction";
@@ -7,19 +6,15 @@ import { addAmountForShoppingCartUser } from "../../redux/reducer/shoppingCartRe
 import { saveShoppingCartInLocalStorage } from "../../redux/actions/localStorageAction";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ADDED_TO_CART, ALREADY_IN_THE_CART } from "../../utils/constants";
+import { ADDED_TO_CART } from "../../utils/constants";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   addProductToWishList,
   checkIfProductWasPurchased,
 } from "../../Controller/cardController";
 import { setwishList } from "../../redux/reducer/wishReducer";
-import {
-  CardProps,
-  gameInAddShoppingCart,
-  todayDiscountType,
-} from "./interfaces/interfaces";
 import { RootState } from "../../redux/store";
+import { CardPropsType } from "../../types";
 
 export const Card = ({
   id,
@@ -28,7 +23,7 @@ export const Card = ({
   price,
   genres,
   state,
-}: CardProps) => {
+}: CardPropsType) => {
   const dispatch = useAppDispatch();
   const { user, isAuthenticated }: any = useAuth0();
   const [successMsg, setSuccessMsg] = useState<string>("");
@@ -40,12 +35,12 @@ export const Card = ({
     classButton: styles.buttonAdd,
     classCard: styles.cardContainer,
   });
-  let totalPrice: number = useAppSelector(
+
+  let totalPrice = useAppSelector(
     (state: RootState) => state.shoppingCartReducer.totalAmount
   );
 
-  // solo funciona el tipado si lo pongo como posible undefined
-  let todaysDiscount: todayDiscountType = useAppSelector(
+  let todaysDiscount = useAppSelector(
     (state: RootState) => state.productReducer.todaysDiscount
   );
 
@@ -60,7 +55,7 @@ export const Card = ({
 
   useEffect(() => {
     if (user) {
-      checkIfProductWasPurchased(user.email, id).then((check: boolean) =>
+      checkIfProductWasPurchased(user.email, id).then((check) =>
         check
           ? setChangeClass({
               classButton: styles.buttonHide,
@@ -77,35 +72,37 @@ export const Card = ({
   useEffect(() => {
     if (
       Number(price) &&
-      todaysDiscount?.discount !== "No_Discount" && //esta comparacion esta mal,  todaysDiscount?.discount es de tipo number y aqui la compara con una string
+      // todaysDiscount?.gen !== "No_Discount" && //Aramis:esta comparacion esta mal,  todaysDiscount?.discount es de tipo number y aqui la compara con una string
       genres.includes(String(todaysDiscount?.genre)) &&
       Number(price) !== discountPrice &&
       !discountApplied
     ) {
-      // @ts-ignore
-      let finalPrice =
-        ((100 - todaysDiscount.discount) * parseFloat(price)) / 100;
-      // @ts-ignore
-      finalPrice = finalPrice.toFixed(2);
-      console.log("finalPrice", finalPrice);
-      setDiscountApplied((prev) => (prev = true));
+      let finalPrice = Number(
+        (((100 - todaysDiscount.discount) * Number(price)) / 100).toFixed(2)
+      );
+
+      setDiscountApplied((prev) => (prev = true)); // Aramis:Esto esta raro, como que no tiene sentido el "prev = true"
       setDiscountPrice(finalPrice);
     }
   }, [price]);
 
-  if (typeof user !== "undefined") {
+  //IMPORTANTT Aramis: Todo esto no se si tiene algun uso en comun, lo unico que hace es traer cosas del estado global.
+  if (user) {
+    //Aramis: esto estaba asi "typeof user !== "undefined"", es muy rebuscado y no tiene sentido
     var listProductsShoppingCart: object[] = useAppSelector(
+      //Aramis:Por como esta usado el codigo obliga a usar variables con var y no es necesario, es mejor encapsular el codigo y los useAppSelector dejarlos afuera como todos los hooks
       (state) => state.shoppingCartReducer.listProductsShoppingCartUser
     );
   } else {
     var listProductsShoppingCart: object[] = useAppSelector(
       (state) => state.shoppingCartReducer.listProductsShoppingCartGuest
     );
-    var totalAmount: number = totalPrice;
+    var totalAmount: number = totalPrice; // Aramis: Esto parece no usarse.
   }
 
   const addingToShoppingCart = () => {
-    const game: gameInAddShoppingCart = {
+    //Aramis: Esto "game" no entiendi porque existe, tenemos las propiedades de arriba que entran al componente y esto es lo mismo. Estamos repitiendo cosas.
+    const game = {
       id,
       name,
       background_image,
@@ -119,8 +116,8 @@ export const Card = ({
       dispatch(addAmountForShoppingCartUser(price));
       setSuccessMsg(ADDED_TO_CART);
     } else {
-      dispatch(addShoppingCart(game));
-      setControl(listProductsShoppingCart.length);
+      dispatch(addShoppingCart(game)); // Aramis:Se podria mandar directamente el objeto de props del componente y listo.
+      setControl(listProductsShoppingCart.length); // Aramis: Esto no se bien para que sirve.
       setSaveInLocalStorage(true);
     }
   };

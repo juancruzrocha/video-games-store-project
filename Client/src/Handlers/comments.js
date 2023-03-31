@@ -14,12 +14,12 @@ const postComment = async (e, email, productId, userComment) => {
     productId,
     comment: userComment,
   };
-  ////console.log()("estoy en el front y soy la data", data);
+
 
   try {
     await axios({
       method: "post",
-      url: "https://games-store-v.netlify.app/user/newComment",
+      url: "http://localhost:3001/user/newComment",
       data,
     });
     await getAllProductComments();
