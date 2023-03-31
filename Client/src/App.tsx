@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { Home } from "./pages/Home/Home";
 import { Products } from "./pages/Products/Products";
 import { Detail } from "./components/Detail/Detail";
-import { CheckOut } from "./pages/CheckOut/CheckOut";
+// import { CheckOut } from "./pages/CheckOut/CheckOut";
 import { Transaccion } from "./pages/mercadoPagoTesting/mpLink";
 import { DiscountManager } from "./components/discountManager/DiscountManager";
 import { PaymentFailed } from "./pages/paymentFailed/PaymentFailed";
@@ -26,8 +26,6 @@ import "./App.css";
 import { Friends } from "./pages/Friends/Friends";
 import Library from "./pages/library/Library";
 
-import { setShoppingCartFromLocalStorage } from "./redux/actions/localStorageAction";
-import { getShoppingCartUserFromDB } from "./redux/actions/shoppingCartAction";
 import { DashboardSales } from "./components/Dashboard/Sales/DashboardSales";
 import NavbarPhone from "./phone/navBarPhone/navBarPhone";
 
@@ -50,13 +48,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getTopRatedProducts());
-
-    dispatch(getListUsers()); // este falla no se porque, rompe cosas
-    if (typeof user !== "undefined") {
-      dispatch(getShoppingCartUserFromDB(user.email));
-    } else {
-      dispatch(setShoppingCartFromLocalStorage());
-    }
+    dispatch(getListUsers());
   }, []);
 
   useEffect(() => {
@@ -78,7 +70,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/checkout" element={<CheckOut />} />
+          {/* <Route path="/checkout" element={<CheckOut />} /> */}
           <Route path="/mptest" element={<Transaccion />} />
           <Route path="/friends" element={<Friends />} />
           <Route path="/failure" element={<PaymentFailed />} />

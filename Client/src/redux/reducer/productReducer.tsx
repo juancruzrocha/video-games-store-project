@@ -16,7 +16,6 @@ const initialState: productReducerState = {
   selectedFilterPriceRangeData: [],
   selectedAlphabeticOrderData: "",
   selectedPriceOrderData: "",
-  todaysDiscount: {},
   discountGloballyApplied: false,
   adminDiscount: false,
   successMsg: "",
@@ -75,9 +74,6 @@ export const productReducer = createSlice({
     eraseItemById: (state) => {
       state.details = {};
     },
-    setTodaysDiscount: (state, action) => {
-      state.todaysDiscount = action.payload;
-    },
     setAutoGlobalDiscount: (state, action) => {
       state.discountGloballyApplied = action.payload;
     },
@@ -118,4 +114,3 @@ export const {
 } = productReducer.actions;
 
 export default productReducer.reducer;
-//export const selectAll = (state: RootState) => state.productReducer;

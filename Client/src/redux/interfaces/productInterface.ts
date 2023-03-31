@@ -31,7 +31,6 @@ export interface productReducerState{
     selectedFilterPriceRangeData: number[],
     selectedAlphabeticOrderData: string,
     selectedPriceOrderData: string,
-    todaysDiscount: TodayDiscountTypes,
     discountGloballyApplied: boolean,
     adminDiscount: boolean,
     successMsg: string,

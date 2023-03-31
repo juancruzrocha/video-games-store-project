@@ -6,14 +6,10 @@ import { getProductByID } from "../../redux/actions/productAction";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { useEffect, useState } from "react";
 import { eraseItemById } from "../../redux/reducer/productReducer";
-import { addShoppingCart } from "../../redux/actions/shoppingCartAction";
-import { addNewProductInShoppingCart } from "../../redux/actions/shoppingCartAction";
 import styles from "./Detail.module.scss";
 import { ADDED_TO_CART, ALREADY_IN_THE_CART } from "../../utils/constants";
-import { addAmountForShoppingCartUser } from "../../redux/reducer/shoppingCartReducer";
 import { useAuth0 } from "@auth0/auth0-react";
 import Comments from "./Comments";
-import { saveShoppingCartInLocalStorage } from "../../redux/actions/localStorageAction";
 import { checkIfProductWasPurchased } from "../../Controller/cardController";
 import NavbarPhone from "../../phone/navBarPhone/navBarPhone";
 //los import comentados de abajo no los toquen que son para implementar los botones a futuro
@@ -30,15 +26,6 @@ export const Detail = () => {
   const dispatch = useAppDispatch();
   const game: any = useAppSelector((state) => state.productReducer.details);
   const [successMsg, setSuccessMsg] = useState("");
-  const [control, setControl] = useState(-1);
-  const [saveInLocalStorage, setSaveInLocalStorage] = useState(false);
-  useEffect(() => {
-    if (saveInLocalStorage === true) {
-      dispatch(
-        saveShoppingCartInLocalStorage(listProductsShoppingCart, totalAmount)
-      );
-    }
-  }, [control]);
 
   useEffect(() => {
     dispatch(getProductByID(parseInt(id)));
@@ -59,39 +46,6 @@ export const Detail = () => {
       dispatch(eraseItemById());
     };
   }, [user]);
-  let totalAmount: number;
-
-  if (typeof user !== "undefined") {
-    var listProductsShoppingCart: object[] = useAppSelector(
-      (state) => state.shoppingCartReducer.listProductsShoppingCartUser
-    );
-  } else {
-    var listProductsShoppingCart: object[] = useAppSelector(
-      (state) => state.shoppingCartReducer.listProductsShoppingCartGuest
-    );
-    totalAmount = useAppSelector(
-      (state) => state.shoppingCartReducer.totalAmount
-    );
-  }
-
-  const addingToShoppingCart = (e: any) => {
-    const item: any = listProductsShoppingCart.find(
-      (item: any) => item.id == parseInt(id)
-    );
-    if (!item) {
-      if (typeof user !== "undefined") {
-        dispatch(addNewProductInShoppingCart(id, user.email));
-        dispatch(addAmountForShoppingCartUser(item.price));
-      } else {
-        dispatch(addShoppingCart(game));
-        setControl(listProductsShoppingCart.length);
-        setSaveInLocalStorage(true);
-      }
-      setSuccessMsg(ADDED_TO_CART);
-    } else {
-      setSuccessMsg(ALREADY_IN_THE_CART);
-    }
-  };
 
   return (
     <>
@@ -111,7 +65,7 @@ export const Detail = () => {
                   <button
                     className={changeClass.classButton}
                     type="button"
-                    onClick={addingToShoppingCart}
+                    // onClick={addingToShoppingCart}
                   >
                     Add To Cart
                   </button>
