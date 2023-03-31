@@ -36,7 +36,7 @@ export const addNewProductInShoppingCart =  (id:any, email:any) => async (dispat
     }
 }
 
-export const removeProductoInShoppingCar =  (id:any, email:any) => async (dispatch: any) => {
+export const removeProductoInShoppingCar =  (id:number, email:string) => async (dispatch: any) => {
     try{
         let carrito:ShoppingCartType[] = (await axios.get(REMOVE_PRODUCT_IN_SHOPPING_CART + `?email=${email}&idProduct=${id}`)).data;
         dispatch(updateShoppingCartUser(carrito));
@@ -46,7 +46,7 @@ export const removeProductoInShoppingCar =  (id:any, email:any) => async (dispat
 }
 
 // Aramis: esto parece no estar en uso, deberia borrarse.
-export const moveProductsFromGuestCartToUserCart = (email:any, carritoGuest:any) => async (dispatch:any) => {
+export const moveProductsFromGuestCartToUserCart = (email:string, carritoGuest:any) => async (dispatch:any) => {
     try{
         console.log(carritoGuest," soy el carrito guest")
         carritoGuest.ForEach((item:ShoppingCartType) => addNewProductInShoppingCart(item.id, email)) //Aramis:tenian una funcion para grabar todos los productor de una en la db
@@ -56,7 +56,8 @@ export const moveProductsFromGuestCartToUserCart = (email:any, carritoGuest:any)
     }
 }
 
-export const getShoppingCartUserFromDB = (email: any) => async(dispatch:any) => {
+export const getShoppingCartUserFromDB = (email: string) => async(dispatch:any) => {
+    console.log(email,"soy el email ")
     try {
         let carrito:ShoppingCartType[] = (await axios.get(PRODUCTS_LIST_SHOPPING_CART + `?email=${email}`)).data;  
         if(carrito.length>0){

@@ -11,6 +11,8 @@ const initialState: productReducerState = {
   carouselData: [],
   searchObject: {},
   searchedName: "",
+  //Aramis: No me gusta todos estos "selectedFilter..." me parece que todo tendria que ir en una sola action
+  //Aramis:Creo que algunos no se usan, corroborar bien
   selectedFilterGenreData: [],
   selectedFilterPlatformData: [],
   selectedFilterPriceRangeData: [],

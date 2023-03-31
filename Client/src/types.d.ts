@@ -1,17 +1,17 @@
 export interface Game {
-  id: number;
-  name: string;
   background_image: string;
-  rating: string;
+  description: string;
+  genres: string[];
+  id: number;
+  images: string[];
+  name: string;
+  platforms: string[];
   playtime: number;
   price: string;
-  description: string;
-  images: string[];
-  platforms: string[];
-  genres: string[];
-  stores: string[];
+  rating: string;
   released: string;
   state: boolean
+  stores: string[];
 }
 
 export interface CardProps {
