@@ -7,18 +7,6 @@ export interface CardProps {
     state:boolean
   }
 
-  export interface todayDiscountType {
-    discount?:number
-    genre?:string
-  }
-
-  export interface gameInAddShoppingCart {
-    id: number
-    name: string
-    background_image: string
-    price: string
-    genres: string[]
-  }
   interface ShoppingCartType {
     ProductId:number
     UserEmail:string

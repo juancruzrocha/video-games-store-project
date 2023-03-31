@@ -14,6 +14,10 @@ interface SearchObjTypes {
     filters: FiltersOrder
     order: OrderFiltersTypes
 }
+interface TodayDiscountTypes {
+	genre: string
+	discount:number
+}
 export interface productReducerState{
     allProductsData: Game[]
     searchedData: Game[],
@@ -27,7 +31,7 @@ export interface productReducerState{
     selectedFilterPriceRangeData: number[],
     selectedAlphabeticOrderData: string,
     selectedPriceOrderData: string,
-    todaysDiscount: object,
+    todaysDiscount: TodayDiscountTypes,
     discountGloballyApplied: boolean,
     adminDiscount: boolean,
     successMsg: string,
