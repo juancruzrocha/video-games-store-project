@@ -4,6 +4,7 @@ import { genresReducerState } from "../interfaces/genresInterface";
 
 const initialState: genresReducerState = {
     listGenresData: [],
+    //Aramis:No supe que es idDetails, no se si sirve para algo
     idDetails: {},
     successMsg: "",
     errorMsg: ""

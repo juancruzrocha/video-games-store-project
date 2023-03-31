@@ -1,16 +1,14 @@
 import { addFriends, resRequest, confirmFriend, pendFriend } from '../reducer/friendReducer';
 import { LIST_USERS as User } from '../../utils/constants';
 import axios from 'axios';
+import { FriendConfirmed } from "../interfaces/friendInterface";
 
 //Agregar amigos
 export const addFriend = (emailUser: string, emailFriend: string) => async (dispatch: any) => {
-		let frReque: object[];
 		try {
-			console.log("soy el rompe culos 3mil --->",emailUser,emailFriend)
-			frReque = (await axios.get(User + `newFriendRequest?emailUser=${emailUser}&emailFriend=${emailFriend}`)).data;
-			console.log("soy el rompe culos ------------>",frReque)
+			//Aramis:Esto que no se entiende de Daniel es cuando se manda un solicitud de amistad a una persona
+			let frReque: FriendConfirmed[] = (await axios.get(User + `newFriendRequest?emailUser=${emailUser}&emailFriend=${emailFriend}`)).data;
 			dispatch(addFriends(frReque))
-			// dispatch(confirmFriend(frReque)); //esto puede romper
 		} catch (error) {
 			console.error('Esto ocurrio en el back ' + error);
 		}
@@ -19,9 +17,8 @@ export const addFriend = (emailUser: string, emailFriend: string) => async (disp
 
 //Respuesta a la solicitud y eliminar solicitud
 export const resReque = (emailUser: string, emailFriend: string, res: string) => async (dispatch: any) => {
-		let responseReque: object[];
 		try {
-			responseReque = (await axios.get(User + `responseRequestFriend?email=${emailUser}&emailFriend=${emailFriend}&response=${res}`)).data;
+			let responseReque:string = (await axios.get(User + `responseRequestFriend?email=${emailUser}&emailFriend=${emailFriend}&response=${res}`)).data;
 			dispatch(resRequest(responseReque));
 		} catch (error) {
 			console.error('Esto ocurrio en el back ' + error);
@@ -31,8 +28,7 @@ export const resReque = (emailUser: string, emailFriend: string, res: string) =>
 //Amigos confirmados
 export const confFriend = (emailUser: string) => async (dispatch: any) => {
 	try {
-		let friendList: object[] = (await axios.get(User + `friendsConfirmed?email=${emailUser}`)).data;
-		console.log("---------> no pos sisoy",friendList)
+		let friendList: FriendConfirmed[] = (await axios.get(User + `friendsConfirmed?email=${emailUser}`)).data;
 		if(typeof(friendList) === 'object') dispatch(confirmFriend(friendList));
 		
 	} catch (error) {
@@ -42,10 +38,8 @@ export const confFriend = (emailUser: string) => async (dispatch: any) => {
 
 //Solicitudes pendientes
 export const pendingFriend = (emailUser: string) => async (dispatch: any) => {
-
-	let pending: object[];
 	try {
-		pending = (await axios.get(User + `friendsPending?email=${emailUser}`)).data;
+		let pending:FriendConfirmed = (await axios.get(User + `friendsPending?email=${emailUser}`)).data;
 		dispatch(pendFriend(pending));
 	} catch (error) {
 		console.error('Esto ocurrio en el back ' + error);

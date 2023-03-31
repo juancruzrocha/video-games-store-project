@@ -16,15 +16,15 @@ interface SearchObjTypes {
 }
 export interface productReducerState{
     allProductsData: Game[]
-    searchedData: Array<object>,
+    searchedData: Game[],
     details: object,
     topProductsData: Game[],
     carouselData: Game[],
     searchObject: SearchObjTypes | {}
     searchedName: string,
-    selectedFilterGenreData: Array<object>,
-    selectedFilterPlatformData: Array<object>,
-    selectedFilterPriceRangeData: Array<number>,
+    selectedFilterGenreData: number[],
+    selectedFilterPlatformData: number[],
+    selectedFilterPriceRangeData: number[],
     selectedAlphabeticOrderData: string,
     selectedPriceOrderData: string,
     todaysDiscount: object,

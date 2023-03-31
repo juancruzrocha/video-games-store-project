@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { access } from "fs";
-
 import { productReducerState } from "../interfaces/productInterface";
 
 const initialState: productReducerState = {

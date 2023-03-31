@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { friendsReducerState } from '../interfaces/friendInterface';
 
 const initialState: friendsReducerState = {
+	//Aramis:newFriendRequest esta al pedo me parece, tengo que borrarlo
 	newFriendRequest: [],
+	//Aramis:Esto no tiene sentido, tengo que borrarlo.
 	responseRequest: '',
 	friendsConfirmed: [],
 	FriendsPending: [],
