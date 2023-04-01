@@ -9,31 +9,26 @@ import { PaymentFailed } from "./pages/paymentFailed/PaymentFailed";
 import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAppDispatch, useAppSelector } from "./redux/hooks/hooks";
-
 import { getListUsers, saveNewUser } from "./redux/actions/userAction";
-
 import {
   getTopRatedProducts,
   setGlobalDiscount,
 } from "./redux/actions/productAction";
-
 import { setAutoGlobalDiscount } from "./redux/reducer/productReducer";
-
 import { DashboardUser } from "./components/Dashboard/Users/DashboardUser";
 import { DashboardProducts } from "./components/Dashboard/ProductsList/DashboardProducts";
 import WishList from "./pages/WishList/WishList";
 import "./App.css";
 import { Friends } from "./pages/Friends/Friends";
 import Library from "./pages/library/Library";
-
 import { DashboardSales } from "./components/Dashboard/Sales/DashboardSales";
 import NavbarPhone from "./phone/navBarPhone/navBarPhone";
+import { saveUserInGlobalState } from "./redux/reducer/userReducer";
 
 function App() {
+  const { user, isAuthenticated }: any = useAuth0();
   const dispatch = useAppDispatch();
-  const { user }: any = useAuth0();
   const userEmail = user?.email;
-
   const listUsersData = useAppSelector(
     (state) => state.userReducer.listUsersData
   );
@@ -45,6 +40,10 @@ function App() {
   );
 
   const admin = listUsersData.find((item) => item.email === userEmail);
+
+  useEffect(() => {
+    dispatch(saveUserInGlobalState(user));
+  }, [user]);
 
   useEffect(() => {
     dispatch(getTopRatedProducts());

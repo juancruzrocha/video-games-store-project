@@ -2,25 +2,14 @@ import { useAppSelector, useAppDispatch } from "../../redux/hooks/hooks";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import style from "./ShoppingCartItem.module.scss";
+import { useEffect } from "react";
 
 export const ShoppingCartItem = () => {
+  const dispatch = useAppDispatch();
   const { user, isAuthenticated, loginWithRedirect }: any = useAuth0();
+  // const userShoppingCartEmpty = useAppSelector((state) => state.shoppingCartReducer.emptyUserDBShoppingCart)
 
-  if (typeof user !== "undefined") {
-    var listProductsShoppingCart: object[] = useAppSelector(
-      (state) => state.shoppingCartReducer.listProductsShoppingCartUser
-    );
-  } else {
-    var listProductsShoppingCart: object[] = useAppSelector(
-      (state) => state.shoppingCartReducer.listProductsShoppingCartGuest
-    );
-  }
-  let totalAmount: number = useAppSelector(
-    (state) => state.shoppingCartReducer.totalAmount
-  );
-
-  totalAmount = Math.round(totalAmount * 100) / 100;
-
+  // Aramis: Este condicional tiene que ser un ternario.
   if (listProductsShoppingCart.length > 0) {
     return (
       <>

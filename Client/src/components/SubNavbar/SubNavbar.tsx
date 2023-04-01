@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ShoppingCart } from "../ShoppingCart/ShoppingCart";
+// import { ShoppingCart } from "../ShoppingCart/ShoppingCart";
 import { useState, useEffect } from "react";
 import styles from "./SubNavbar.module.scss";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
@@ -51,7 +51,7 @@ const SubNavbar = (state: any) => {
         </>
       )}
 
-      <ShoppingCart />
+      {/* <ShoppingCart /> */}
     </div>
   );
 };

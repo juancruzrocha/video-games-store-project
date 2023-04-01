@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { listUser, userByID, errorMsg,  } from "../reducer/userReducer";
+import { listUser, userByID, errorMsg, setDataCurrentUser,  } from "../reducer/userReducer";
 import { LIST_USERS, ADD_NEW_USER } from "../../utils/constants";
 import { DataUser } from '../interfaces/userInterface';
 

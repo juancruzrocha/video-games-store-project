@@ -4,6 +4,7 @@ import { UsersReducerState } from "../interfaces/userInterface";
 
 //Aramis: Nop puedo tipar todo porque hay cosas que parecen no servir.
 const initialState: UsersReducerState = {
+    currentUser: {},
     listUsersData:[],
     idDetails: {},
     successMsg: "",
@@ -14,6 +15,9 @@ export const userReducer = createSlice({
     name: "userReducer",
     initialState,
     reducers:{
+        saveUserInGlobalState: (state,action) => {
+            state.currentUser = action.payload;
+        },
         listUser: (state, action) => {
             state.listUsersData = action.payload;
         },
@@ -32,5 +36,5 @@ export const userReducer = createSlice({
     }
 })
 
-export const { listUser, userByID, successMsg, errorMsg } = userReducer.actions;
+export const { saveUserInGlobalState,listUser, userByID, successMsg, errorMsg } = userReducer.actions;
 export default userReducer.reducer

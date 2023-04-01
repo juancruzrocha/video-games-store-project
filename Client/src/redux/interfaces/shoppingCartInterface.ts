@@ -38,11 +38,6 @@ export interface gameParamType {
 }
 
 export interface shoppingCartReducerState{
-    listProductsShoppingCartUser: ShoppingCartType[],
-    totalAmount: number, 
-    successMsg: string,
-    errorMsg: string,
-    listProductsShoppingCartGuest: ShoppingCartType[],
-    emptyUserDBShoppingCart: boolean,
-    finalPriceForCheckout: number,
+    productListShoopingCart: ShoppingCartType[],
+
 }

@@ -11,6 +11,7 @@ import {
 import { setwishList } from "../../redux/reducer/wishReducer";
 import { RootState } from "../../redux/store";
 import { CardPropsType } from "../../types";
+import { addProductInShoppingCar } from "../../redux/actions/shoppingCartAction";
 
 export const Card = ({
   id,
@@ -23,14 +24,13 @@ export const Card = ({
   const dispatch = useAppDispatch();
   const { user, isAuthenticated }: any = useAuth0();
   const [successMsg, setSuccessMsg] = useState<string>("");
-  const [control, setControl] = useState<number>(-1);
   const [discountPrice, setDiscountPrice] = useState<number>(0);
   const [discountApplied, setDiscountApplied] = useState<boolean>(false);
   const [changeClass, setChangeClass] = useState({
     classButton: styles.buttonAdd,
     classCard: styles.cardContainer,
   });
-
+  //AramisNote: Este useEffect lo unico que hace las clases de css dinamicas.
   useEffect(() => {
     if (user) {
       checkIfProductWasPurchased(user.email, id).then((check) =>
@@ -46,8 +46,7 @@ export const Card = ({
       );
     }
   }, []);
-
-  const addingToWishList = async () => {
+  const addProductToWishListHanlder = async () => {
     const newWishList = await addProductToWishList(user.email, id);
     dispatch(setwishList(newWishList));
   };
@@ -87,14 +86,16 @@ export const Card = ({
                   <button
                     className={changeClass.classButton}
                     type="button"
-                    // onClick={}
+                    onClick={() =>
+                      dispatch(addProductInShoppingCar(user.email, id))
+                    }
                   >
                     Add To Cart
                   </button>
                   {isAuthenticated === true && (
                     <button
                       className={changeClass.classButton}
-                      onClick={addingToWishList}
+                      onClick={addProductToWishListHanlder}
                     >
                       Add Favourite
                     </button>

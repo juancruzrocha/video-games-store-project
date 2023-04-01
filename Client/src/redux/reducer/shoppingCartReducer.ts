@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { shoppingCartReducerState } from "../interfaces/shoppingCartInterface";
 
 
-const initialState = {
+const initialState: shoppingCartReducerState= {
     productListShoopingCart:[]
 }
 
@@ -11,7 +11,7 @@ export const shoppingCartReducer = createSlice({
     name: "shoppingCartReducer",
     initialState,
     reducers:{
-        getProductSoppingCart: (state, action) => {
+        setShoppingCartInGlobalState: (state, action) => {
             state.productListShoopingCart = action.payload;
         },
         
@@ -19,7 +19,7 @@ export const shoppingCartReducer = createSlice({
 })
 
 export const {
-    // getProductSoppingCart
+    setShoppingCartInGlobalState
 } = shoppingCartReducer.actions;
 
 export default shoppingCartReducer.reducer

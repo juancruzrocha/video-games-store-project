@@ -26,6 +26,7 @@ export interface DataUser {
 }
 export interface UsersReducerState{
   listUsersData: DataUser[],
+  currentUser:{} // AramisWork: tengo que definir que es esto.
   idDetails: object,
   successMsg: string,
   errorMsg: string
