@@ -28,6 +28,14 @@ export interface ShoppingCartType {
     released:string
     state:boolean
 }
+export interface ShoppingCartTypeLocalStorage {
+    id:number
+    name:string
+    price:string
+    genres:string[]
+    state:boolean
+
+}
 
 export interface gameParamType {
     background_image:string
@@ -38,6 +46,6 @@ export interface gameParamType {
 }
 
 export interface shoppingCartReducerState{
-    productListShoopingCart: ShoppingCartType[],
+    productListShoopingCart: ShoppingCartType[], //capaz que deberia agregar esta interface que aplica cuando no hay usuarios | ShoppingCartTypeLocalStorage[]
 
 }

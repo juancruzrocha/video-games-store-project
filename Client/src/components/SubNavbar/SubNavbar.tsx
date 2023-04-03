@@ -5,6 +5,7 @@ import styles from "./SubNavbar.module.scss";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getListUsers } from "../../redux/actions/userAction";
+import ShoppingCart from "../../components/ShoppingCart/ShoppingCart";
 const SubNavbar = (state: any) => {
   const [changeClass, setChangeClass] = useState({
     class: styles.containerShow,
@@ -51,7 +52,7 @@ const SubNavbar = (state: any) => {
         </>
       )}
 
-      {/* <ShoppingCart /> */}
+      <ShoppingCart />
     </div>
   );
 };
